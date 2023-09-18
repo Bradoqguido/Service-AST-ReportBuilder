@@ -260,4 +260,4 @@ def generate_pdf():
                     headers={'Content-Disposition': 'attachment; filename=report.pdf'})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=3011)

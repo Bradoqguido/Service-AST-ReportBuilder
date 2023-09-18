@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  ast_report_builder:
+    container_name: ast_report_builder
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    restart: always
+    working_dir: /app
+    volumes:
+      - .:/app
+    ports:
+      - '3011:3011'
+    command: python3 service.py

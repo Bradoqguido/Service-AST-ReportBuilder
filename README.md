@@ -6,7 +6,7 @@ This service is a Report Builder that uses Abstract Syntax Tree (AST) as JSON ps
 Uses mostly the lib `reportlab` to build the report from the AST and flask to expose the service to the internet.
 
 # Activate your V-env
-Run this command to activate the venv: `source .venv/bin/activate`.
+Run this command to activate the venv: `source venv/bin/activate`.
 
 If you don't have the venv installed, run: `python3 -m venv .venv` and then activate it.
 
@@ -17,6 +17,10 @@ This code is created using **Python 3**
 Install the service dependencies with the command: `pip3 install -U -r requirements.txt`
 
 Run the service with the command: `python3 service.py`
+
+# Docker commands
+Build container: `docker-compose -f docker-compose.yml build`
+Run container: `docker-compose -f docker-compose.yml up`
 
 # Abstract Syntax Tree (AST)
 
@@ -113,4 +117,3 @@ The example payload is already tested, and it's the structure of the pdf documen
 - text types (like title, subtitle, caption)
 - more settings definitions
 - more graphs
-- docker container configuration (setup as cloud service)
