@@ -45,25 +45,28 @@ class Functions:
                     table_data.append(row_node.content)  # Data rows
 
                 # Create a table and set its style
-                table = Table(table_data, colWidths=node.settings.get('colWidth', 100), rowHeights=node.settings.get('rowHeights', 16))
+                table = Table(table_data, colWidths=node.settings.get('colWidth', 100), rowHeights=node.settings.get('rowHeight', 16))
 
                 # Define styles for the column headers, row headers, and table body
                 col_header_style = TableStyle([
-                    ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
-                    ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
-                    ('ALIGN', (0, 0), (-1, 0), 'CENTER'),
-                    ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),  # Font for column headers
+                    ('BACKGROUND', (0, 0), (-1, 0), node.settings.get('colHeaderBackgroundColor', '#ffffff')),
+                    ('TEXTCOLOR', (0, 0), (-1, 0), node.settings.get('colHeaderTextColor', '#000000')),
+                    ('ALIGN', (0, 0), (-1, 0), node.settings.get('colHeaderTextAlign', 'CENTER')),
+                    ('FONTNAME', (0, 0), (-1, 0), node.settings.get('colHeaderFontName', 'Helvetica-Bold')),  # Font for column headers
                 ])
 
                 row_header_style = TableStyle([
-                    ('BACKGROUND', (0, 1), (0, -1), colors.beige),
-                    ('GRID', (0, 0), (-1, -1), 1, colors.black),
-                    ('FONTNAME', (0, 1), (0, -1), 'Times-Bold'),  # Font for row headers (excluding the first column)
+                    ('BACKGROUND', (0, 1), (0, -1), node.settings.get('rowHeaderBackgroundColor', '#ffffff')),
+                    ('FONTNAME', (0, 1), (0, -1), node.settings.get('rowHeaderFontName', 'Times-Bold')),  # Font for row headers (excluding the first column)
                 ])
 
                 table_body_style = TableStyle([
                     ('GRID', (0, 0), (-1, -1), 1, colors.black),  # Grid for the table body
-                    ('FONTNAME', (0, 1), (-1, -1), 'Helvetica'),  # Font for the table body
+                    ('BACKGROUND', (0, 0), (-1, 0), node.settings.get('cellBackgroundColor', '#ffffff')),
+                    ('TEXTCOLOR', (0, 0), (-1, 0), node.settings.get('cellTextColor', '#000000')),
+                    ('ALIGN', (1, 1), (-1, -1), node.settings.get('cellTextAlign', 'CENTER')),
+                    ('FONTNAME', (0, 1), (-1, -1), node.settings.get('cellFontName', 'Helvetica')),  # Font for the table body
+                    ('GRID', (0, 0), (-1, -1), 1, node.settings.get('cellGridColor', '#000000')),
                 ])
 
                 # Apply the styles to the table
