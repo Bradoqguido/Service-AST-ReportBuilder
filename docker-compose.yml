@@ -1,8 +1,8 @@
 version: '3.8'
 
 services:
-  ast_report_builder:
-    container_name: ast_report_builder
+  ast_report_builder_service:
+    container_name: ast_report_builder_service
     build:
       context: .
       dockerfile: ./Dockerfile
@@ -12,4 +12,4 @@ services:
       - .:/app
     ports:
       - '3011:3011'
-    command: python3 service.py
+    command: python3 src/app.py

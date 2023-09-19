@@ -1,4 +1,4 @@
-### Version 0.1.0
+### Version 0.1.1
 
 # Service-AST-ReportBuilder
 This service is a Report Builder that uses Abstract Syntax Tree (AST) as JSON pseudocode to generate reports and graphs.
@@ -8,7 +8,7 @@ Uses mostly the lib `reportlab` to build the report from the AST and flask to ex
 # Activate your V-env
 Run this command to activate the venv: `source venv/bin/activate`.
 
-If you don't have the venv installed, run: `python3 -m venv .venv` and then activate it.
+If you don't have the venv installed, run: `python3 -m venv venv` and then activate it.
 
 # How to use
 

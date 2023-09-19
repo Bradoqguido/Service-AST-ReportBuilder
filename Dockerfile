@@ -15,4 +15,4 @@ RUN pip --no-cache-dir install -U -r requirements.txt
 
 EXPOSE 3011/tcp
 
-CMD ["python3", "service.py"]
+CMD ["python3", "src/app.py"]
