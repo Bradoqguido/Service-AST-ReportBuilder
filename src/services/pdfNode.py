@@ -19,6 +19,7 @@ class PDFNode:
             "colHeaderFontName": "Helvetica-Bold",
             "rowHeaderFontName": "Times-Bold",
             "cellFontName": "Helvetica",
+            "listColSpam": 6,
             "chartTitle": "",
             "chartWidth": 400,
             "chartHeight": 300,

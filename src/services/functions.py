@@ -61,7 +61,6 @@ class Functions:
                 ])
 
                 table_body_style = TableStyle([
-                    ('GRID', (0, 0), (-1, -1), 1, colors.black),  # Grid for the table body
                     ('BACKGROUND', (0, 0), (-1, 0), node.settings.get('cellBackgroundColor', '#ffffff')),
                     ('TEXTCOLOR', (0, 0), (-1, 0), node.settings.get('cellTextColor', '#000000')),
                     ('ALIGN', (1, 1), (-1, -1), node.settings.get('cellTextAlign', 'CENTER')),
@@ -84,41 +83,44 @@ class Functions:
 
                 # Add the spacer after the table
                 elements.append(spacer)
-            elif node.node_type == 'pie-chart':
-                # Initialize data for the graph
-                xlabel = node.content[0].get("xlabel", None)
-                xdata = node.content[0].get("xdata", None)
-                ylabel = node.content[1].get("ylabel", None)
-                ydata = node.content[1].get("ydata", None)
+            elif node.node_type == 'list':
+                # Construct a data list for the table
+                list_data = [node.content]  # Header row
+                for row_node in node.children:
+                    list_data.append(row_node.content)  # Data rows
 
-                pltTitle = node.settings.get('pltTitle', '')
+                colWidth = node.settings.get('colWidth', 100)
+                listColSpam = node.settings.get('listColSpam', 4)
+                total_width = listColSpam * colWidth
 
-                if xlabel is None or ylabel is None or xdata is None or ydata is None:
-                    raise ValueError("Invalid graph data in the AST")
+                # Create a list and set its style
+                list = Table(list_data, colWidths=[total_width] * listColSpam, rowHeights=node.settings.get('rowHeight', 16))
 
-                # Convert the data to the required format
-                data = [(str(label), int(value)) for label, value in zip(xdata, ydata)]
+                # Define styles for the column headers, row headers, and table body
+                list_style = TableStyle(
+                    [('ALIGN', (0, 0), (-1, 0), node.settings.get('colHeaderTextAlign', 'CENTER')),
+                     ('BACKGROUND', (0, 0), (-1, 0), node.settings.get('cellBackgroundColor', '#ffffff')),
+                     ('TEXTCOLOR', (0, 0), (-1, 0), node.settings.get('cellTextColor', '#000000')),
+                     ('ALIGN', (1, 1), (-1, -1), node.settings.get('cellTextAlign', 'LEFT')),
+                     ('FONTNAME', (0, 1), (-1, -1), node.settings.get('cellFontName', 'Helvetica')),
+                     ('LINEABOVE', (0,0), (-1,0), 2, colors.white),
+                     ('LINEABOVE', (0,1), (-1,-1), 0.25, colors.gray),
+                     ('LINEBELOW', (0,-1), (-1,-1), 2, colors.gray)]
+                )
 
-                # Create a drawing for the chart
-                chart = Drawing(400, 200)
-                pie = Pie()
-                pie.x = 150
-                pie.y = 50
-                pie.width = 100
-                pie.height = 100
-                pie.data = data
-                pie.labels = [String(0, 0, label) for label, _ in data]
+                # Apply the styles to the table
+                list.setStyle(list_style)
 
-                chart.add(pie)
+                spacer = Spacer(1, 20)  # 20 points of space
 
-                # Add a title to the chart
-                title = String(200, 175, pltTitle)
-                title.fontName = 'Helvetica-Bold'
-                title.fontSize = 14
-                chart.add(title)
+                # Add the spacer before the table
+                elements.append(spacer)
 
-                # Add the chart to the PDF elements
-                elements.append(chart)
+                # Add the list to the PDF
+                elements.append(list)
+
+                # Add the spacer after the table
+                elements.append(spacer)
             elif node.node_type == 'horizontal-line-chart':
                 # Initialize data for the graph
                 xlabel = node.content[0].get("xlabel", None)

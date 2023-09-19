@@ -1,4 +1,4 @@
-### Version 0.1.2
+### Version 0.1.3
 
 # Service-AST-ReportBuilder
 This service is a Report Builder that uses Abstract Syntax Tree (AST) as JSON pseudocode to generate reports and graphs.
@@ -93,6 +93,43 @@ The example payload is already tested, and it's the structure of the pdf documen
         {
           "node_type": "table_row",
           "content": ["Sensor 4", "Value 4", 4,2,3,4],
+          "children": []
+        }
+      ]
+    },
+    {
+      "node_type": "list",
+      "content": ["Sensors"],
+      "settings": {
+        "colWidth": 100,
+        "rowHeight": 16,
+        "cellBackgroundColor": "#ffffff",
+        "cellTextColor": "#000000",
+        "cellGridColor": "#ffffff",
+        "listColSpam": 6,
+        "colHeaderTextAlign": "CENTER",
+        "cellTextAlign": "LEFT",
+        "cellFontName": "Helvetica"
+      },
+      "children": [
+        {
+          "node_type": "line_row",
+          "content": ["It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."],
+          "children": []
+        },
+        {
+          "node_type": "line_row",
+          "content": ["It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."],
+          "children": []
+        },
+        {
+          "node_type": "line_row",
+          "content": ["It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."],
+          "children": []
+        },
+        {
+          "node_type": "line_row",
+          "content": ["It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."],
           "children": []
         }
       ]
