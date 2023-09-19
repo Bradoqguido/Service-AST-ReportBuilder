@@ -1,5 +1,3 @@
-import json
-
 # Define a placeholder class for the PDFNode
 class PDFNode:
     def __init__(self, node_type, content=None, settings=None, children=None):

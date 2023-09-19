@@ -1,5 +1,4 @@
 from flask import Flask, request, Response
-import json
 from services.auth import Auth
 from services.functions import Functions
 
