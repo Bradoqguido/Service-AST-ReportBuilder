@@ -45,30 +45,35 @@ The example payload is already tested, and it's the structure of the pdf documen
   "content": [],
   "children": [
     {
+      "node_type": "title",
+      "content": ["This is a AST Report."],
+      "children": []
+    },
+    {
       "node_type": "paragraph",
-      "content": ["This is a sample PDF generated using an AST."],
+      "content": ["It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."],
       "children": []
     },
     {
       "node_type": "horizontal-line-chart",
       "settings": {
-          "pltWidth": 400,
-          "pltHeight": 200
+        "chartWidth": 400,
+        "chartHeight": 200
       },
       "content": [{
-          "xlabel": "X-axis",
-          "xdata": ["jan","feb","mar","abr","mai","jun"]
-        },{
-          "ylabel": "Y-axis",
-          "ydata": [
-              {
-                  "data": [13, 5, 20, 22, 37, 45]
-              }, 
-              {
-                  "data": [5, 20, 46, 38, 23, 21]
-              }
-           ]
-        }
+        "xlabel": "X-axis",
+        "xdata": ["1","2","3","4","5","6"]
+      },{
+        "ylabel": "Y-axis",
+        "ydata": [
+          {
+            "data": [13, 5, 20, 22, 37, 45]
+          },
+          {
+            "data": [5, 20, 46, 38, 23, 21]
+          }
+        ]
+      }
       ],
       "children": []
     },
@@ -81,10 +86,10 @@ The example payload is already tested, and it's the structure of the pdf documen
       "node_type": "table",
       "content": ["Sensor", "Data", "Day"],
       "settings": {
-          "colWidth": 100,
-          "rowHeights": 16,
-          "backgroundColor": "#fff6ff",
-          "gridColor": "#fffff0"
+        "colWidth": 100,
+        "rowHeights": 16,
+        "backgroundColor": "#fff6ff",
+        "gridColor": "#fffff0"
       },
       "children": [
         {
@@ -114,6 +119,5 @@ The example payload is already tested, and it's the structure of the pdf documen
 ```
 
 # Future improvements
-- text types (like title, subtitle, caption)
 - more settings definitions
 - more graphs

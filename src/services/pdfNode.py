@@ -8,9 +8,9 @@ class PDFNode:
             "rowHeights": 16,
             "backgroundColor": "#ffffff",
             "gridColor": "#ffffff",
-            "pltTitle": "",
-            "pltWidth": 400,
-            "pltHeight": 300,
+            "chartTitle": "",
+            "chartWidth": 400,
+            "chartHeight": 300,
         }
         self.children = children if children is not None else []
 

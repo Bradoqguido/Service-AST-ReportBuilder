@@ -29,8 +29,15 @@ class Functions:
         # Implement PDF generation logic based on the AST structure
         def render_node(node):
             if node.node_type == 'paragraph':
-                # Add a paragraph to the PDF
-                elements.append(Paragraph(node.content[0], styles['Normal']))
+                # Add a paragraph with text justification to the PDF
+                paragraph = Paragraph(node.content[0], styles['Normal'])
+                paragraph.alignment='justify'
+
+                # Add the justified paragraph to the PDF elements
+                elements.append(paragraph)
+            if node.node_type == 'title':
+                # Add a title to the PDF
+                elements.append(Paragraph(node.content[0], styles['Title']))
             elif node.node_type == 'table':
                 # Construct a data list for the table
                 table_data = [node.content]  # Header row
