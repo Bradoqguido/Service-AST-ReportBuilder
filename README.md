@@ -1,4 +1,4 @@
-### Version 0.1.1
+### Version 0.1.2
 
 # Service-AST-ReportBuilder
 This service is a Report Builder that uses Abstract Syntax Tree (AST) as JSON pseudocode to generate reports and graphs.
@@ -55,6 +55,49 @@ The example payload is already tested, and it's the structure of the pdf documen
       "children": []
     },
     {
+      "node_type": "table",
+      "content": ["Sensor", "Data", "Day", "Sensor 1", "Sensor 2", "Sensor 3"],
+      "settings": {
+        "colWidth": 100,
+        "rowHeight": 16,
+        "colHeaderBackgroundColor": "#ffffff",
+        "colHeaderTextColor": "#000000",
+        "colHeaderTextAlign": "CENTER",
+        "rowHeaderBackgroundColor": "#ffffff",
+        "rowHeaderTextColor": "#000000",
+        "rowHeaderTextAlign": "CENTER",
+        "cellBackgroundColor": "#ffffff",
+        "cellTextColor": "#000000",
+        "cellGridColor": "#000000",
+        "cellTextAlign": "CENTER",
+        "colHeaderFontName": "Helvetica-Bold",
+        "rowHeaderFontName": "Times-Bold",
+        "cellFontName": "Helvetica"
+      },
+      "children": [
+        {
+          "node_type": "table_row",
+          "content": ["Sensor 1", "Value 1", 1,2,3,4],
+          "children": []
+        },
+        {
+          "node_type": "table_row",
+          "content": ["Sensor 2", "Value 2", 2,2,3,4],
+          "children": []
+        },
+        {
+          "node_type": "table_row",
+          "content": ["Sensor 3", "Value 3", 3,2,3,4],
+          "children": []
+        },
+        {
+          "node_type": "table_row",
+          "content": ["Sensor 4", "Value 4", 4,2,3,4],
+          "children": []
+        }
+      ]
+    },
+    {
       "node_type": "horizontal-line-chart",
       "settings": {
         "chartWidth": 400,
@@ -76,43 +119,6 @@ The example payload is already tested, and it's the structure of the pdf documen
       }
       ],
       "children": []
-    },
-    {
-      "node_type": "paragraph",
-      "content": ["This is a sample PDF generated using an AST."],
-      "children": []
-    },
-    {
-      "node_type": "table",
-      "content": ["Sensor", "Data", "Day"],
-      "settings": {
-        "colWidth": 100,
-        "rowHeights": 16,
-        "backgroundColor": "#fff6ff",
-        "gridColor": "#fffff0"
-      },
-      "children": [
-        {
-          "node_type": "table_row",
-          "content": ["Sensor 1", "Value 1", 1],
-          "children": []
-        },
-        {
-          "node_type": "table_row",
-          "content": ["Sensor 2", "Value 2", 2],
-          "children": []
-        },
-        {
-          "node_type": "table_row",
-          "content": ["Sensor 3", "Value 3", 3],
-          "children": []
-        },
-        {
-          "node_type": "table_row",
-          "content": ["Sensor 4", "Value 4", 4],
-          "children": []
-        }
-      ]
     }
   ]
 }
