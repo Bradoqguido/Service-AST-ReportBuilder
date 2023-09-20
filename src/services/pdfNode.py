@@ -23,6 +23,8 @@ class PDFNode:
             "chartTitle": "",
             "chartWidth": 400,
             "chartHeight": 300,
+            "spaceBefore": 0,
+            "spaceAfter": 0
         }
         self.children = children if children is not None else []
 

@@ -1,4 +1,4 @@
-### Version 0.1.4
+### Version 0.1.5
 
 # Service-AST-ReportBuilder
 This service is a Report Builder that uses Abstract Syntax Tree (AST) as JSON pseudocode to generate reports and graphs.
@@ -28,31 +28,47 @@ This document is oriented by node and their content, settings and children.
 
 the root node is `document` <br>
 the children nodes are:
+- `title`
+  - *content*: string
+  - *settings*: object
 - `paragraph`
-  - *content*: string
+  - *content*: array
+    - *chartXData*: array
+    - *chatYData*: array
+      - *row*: array
+  - *settings*: object
 - `horizontal-line-chart`
-  - *content*: string
+  - *content*: array
+    - *chartXData*: array
+    - *chatYData*: array
+      - *row*: array
+  - *settings*: object
 - `table`
-  - *content*: string[] # table headers
+  - *content*: string[]
   - *children*
     - table_row
-      - *content*: [] # row values
+      - *content*: []
+- `list`
+  - *content*: string[]
+  - *children*
+    - line_row
+      - *content*: string[]
 
 The example payload is already tested, and it's the structure of the pdf document. 
 ```json
 {
   "node_type": "document",
-  "content": [],
   "children": [
     {
       "node_type": "title",
       "content": ["This is a AST Report."],
-      "children": []
+      "settings": {
+        "spaceAfter": 20
+      }
     },
     {
       "node_type": "paragraph",
-      "content": ["It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."],
-      "children": []
+      "content": ["It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."]
     },
     {
       "node_type": "table",
@@ -77,23 +93,19 @@ The example payload is already tested, and it's the structure of the pdf documen
       "children": [
         {
           "node_type": "table_row",
-          "content": ["Sensor 1", "Value 1", 1,2,3,4],
-          "children": []
+          "content": ["Sensor 1", "Value 1", 1,2,3,4]
         },
         {
           "node_type": "table_row",
-          "content": ["Sensor 2", "Value 2", 2,2,3,4],
-          "children": []
+          "content": ["Sensor 2", "Value 2", 2,2,3,4]
         },
         {
           "node_type": "table_row",
-          "content": ["Sensor 3", "Value 3", 3,2,3,4],
-          "children": []
+          "content": ["Sensor 3", "Value 3", 3,2,3,4]
         },
         {
           "node_type": "table_row",
-          "content": ["Sensor 4", "Value 4", 4,2,3,4],
-          "children": []
+          "content": ["Sensor 4", "Value 4", 4,2,3,4]
         }
       ]
     },
@@ -114,23 +126,19 @@ The example payload is already tested, and it's the structure of the pdf documen
       "children": [
         {
           "node_type": "line_row",
-          "content": ["It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."],
-          "children": []
+          "content": ["It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."]
         },
         {
           "node_type": "line_row",
-          "content": ["It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."],
-          "children": []
+          "content": ["It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."]
         },
         {
           "node_type": "line_row",
-          "content": ["It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."],
-          "children": []
+          "content": ["It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."]
         },
         {
           "node_type": "line_row",
-          "content": ["It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."],
-          "children": []
+          "content": ["It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."]
         }
       ]
     },
@@ -139,13 +147,12 @@ The example payload is already tested, and it's the structure of the pdf documen
       "settings": {
         "chartWidth": 400,
         "chartHeight": 200,
-        "chartTitle": "Graph of most used words"
+        "chartTitle": "Graph of most used words",
+        "spaceBefore": 20
       },
       "content": [{
-        "chatXLabel": "X-axis",
         "chartXData": ["1","2","3","4","5","6"]
       },{
-        "chartYLabel": "Y-axis",
         "chatYData": [
           {
             "row": [13, 5, 20, 22, 37, 45]
@@ -161,13 +168,11 @@ The example payload is already tested, and it's the structure of the pdf documen
           }
         ]
       }
-      ],
-      "children": []
+      ]
     }
   ]
 }
 ```
 
 # Future improvements
-- more settings definitions
 - more graphs

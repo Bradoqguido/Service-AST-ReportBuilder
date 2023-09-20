@@ -33,11 +33,23 @@ class Functions:
                 paragraph = Paragraph(node.content[0], styles['Normal'])
                 paragraph.alignment='justify'
 
+                # Add the spacer before
+                elements.append(Spacer(1, node.settings.get('spaceBefore', 0)))
+
                 # Add the justified paragraph to the PDF elements
                 elements.append(paragraph)
+
+                # Add the spacer after
+                elements.append(Spacer(1, node.settings.get('spaceAfter', 0)))
             if node.node_type == 'title':
+                # Add the spacer before
+                elements.append(Spacer(1, node.settings.get('spaceBefore', 0)))
                 # Add a title to the PDF
+
                 elements.append(Paragraph(node.content[0], styles['Title']))
+
+                # Add the spacer after
+                elements.append(Spacer(1, node.settings.get('spaceAfter', 0)))
             elif node.node_type == 'table':
                 # Construct a data list for the table
                 table_data = [node.content]  # Header row
@@ -73,16 +85,14 @@ class Functions:
                 table.setStyle(col_header_style)
                 table.setStyle(row_header_style)
 
-                spacer = Spacer(1, 10)  # 20 points of space
-
-                # Add the spacer before the table
-                elements.append(spacer)
+                # Add the spacer before
+                elements.append(Spacer(1, node.settings.get('spaceBefore', 10)))
 
                 # Add the table to the PDF
                 elements.append(table)
 
-                # Add the spacer after the table
-                elements.append(spacer)
+                # Add the spacer after
+                elements.append(Spacer(1, node.settings.get('spaceAfter', 10)))
             elif node.node_type == 'list':
                 # Construct a data list for the table
                 list_data = [node.content]  # Header row
@@ -111,18 +121,15 @@ class Functions:
                 # Apply the styles to the table
                 list.setStyle(list_style)
 
-                spacer = Spacer(1, 10)  # 20 points of space
-
-                # Add the spacer before the table
-                elements.append(spacer)
+                # Add the spacer before
+                elements.append(Spacer(1, node.settings.get('spaceBefore', 10)))
 
                 # Add the list to the PDF
                 elements.append(list)
 
-                # Add the spacer after the table
-                elements.append(spacer)
+                # Add the spacer after
+                elements.append(Spacer(1, node.settings.get('spaceAfter', 10)))
             elif node.node_type == 'horizontal-line-chart':
-                elements.append(Paragraph(node.settings.get('chartTitle', ''), styles['Title']))
                 # Initialize data for the graph
                 chartXData = node.content[0].get("chartXData", None)
                 chatYData = node.content[1].get("chatYData", None)
@@ -172,8 +179,15 @@ class Functions:
                 lc.lines[1].strokeWidth = 1
                 chart.add(lc)
 
-                # Add the chart to the PDF elements
+                # Add the spacer before
+                elements.append(Spacer(1, node.settings.get('spaceBefore', 10)))
+
+                # Add the title and chart to the PDF elements
+                elements.append(Paragraph(node.settings.get('chartTitle', ''), styles['Title']))
                 elements.append(chart)
+
+                # Add the spacer after
+                elements.append(Spacer(1, node.settings.get('spaceAfter', 10)))
 
             for child in node.children:
                 render_node(child)
