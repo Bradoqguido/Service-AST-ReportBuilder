@@ -68,6 +68,7 @@ class Functions:
                 ])
 
                 row_header_style = TableStyle([
+                    ('ALIGN', (0, 1), (0, -1), node.settings.get('rowHeaderTextAlign', 'CENTER')),
                     ('BACKGROUND', (0, 1), (0, -1), node.settings.get('rowHeaderBackgroundColor', '#ffffff')),
                     ('FONTNAME', (0, 1), (0, -1), node.settings.get('rowHeaderFontName', 'Times-Bold')),  # Font for row headers (excluding the first column)
                 ])
@@ -111,7 +112,7 @@ class Functions:
                     [('ALIGN', (0, 0), (-1, 0), node.settings.get('colHeaderTextAlign', 'CENTER')),
                      ('BACKGROUND', (0, 0), (-1, 0), node.settings.get('cellBackgroundColor', '#ffffff')),
                      ('TEXTCOLOR', (0, 0), (-1, 0), node.settings.get('cellTextColor', '#000000')),
-                     ('ALIGN', (1, 1), (-1, -1), node.settings.get('cellTextAlign', 'LEFT')),
+                     ('ALIGN', (0, 1), (0, -1), node.settings.get('cellTextAlign', 'CENTER')),
                      ('FONTNAME', (0, 1), (-1, -1), node.settings.get('cellFontName', 'Helvetica')),
                      ('LINEABOVE', (0,0), (-1,0), 2, colors.white),
                      ('LINEABOVE', (0,1), (-1,-1), 0.25, colors.gray),
