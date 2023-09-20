@@ -1,4 +1,4 @@
-### Version 0.1.3
+### Version 0.1.4
 
 # Service-AST-ReportBuilder
 This service is a Report Builder that uses Abstract Syntax Tree (AST) as JSON pseudocode to generate reports and graphs.
@@ -138,19 +138,26 @@ The example payload is already tested, and it's the structure of the pdf documen
       "node_type": "horizontal-line-chart",
       "settings": {
         "chartWidth": 400,
-        "chartHeight": 200
+        "chartHeight": 200,
+        "chartTitle": "Graph of most used words"
       },
       "content": [{
-        "xlabel": "X-axis",
-        "xdata": ["1","2","3","4","5","6"]
+        "chatXLabel": "X-axis",
+        "chartXData": ["1","2","3","4","5","6"]
       },{
-        "ylabel": "Y-axis",
-        "ydata": [
+        "chartYLabel": "Y-axis",
+        "chatYData": [
           {
-            "data": [13, 5, 20, 22, 37, 45]
+            "row": [13, 5, 20, 22, 37, 45]
           },
           {
-            "data": [5, 20, 46, 38, 23, 21]
+            "row": [5, 20, 46, 38, 23, 21]
+          },
+          {
+            "row": [32, 0, 15, 30, 32.5, 33]
+          },
+          {
+            "row": [22, 16, 15, 30, 33.5, 7]
           }
         ]
       }
