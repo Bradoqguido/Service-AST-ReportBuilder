@@ -110,6 +110,7 @@ class Functions:
                 # Define styles for the column headers, row headers, and table body
                 list_style = TableStyle(
                     [('ALIGN', (0, 0), (-1, 0), node.settings.get('colHeaderTextAlign', 'CENTER')),
+                     ('FONTNAME', (0, 0), (-1, 0), node.settings.get('colHeaderFontName', 'Helvetica-Bold')),
                      ('BACKGROUND', (0, 0), (-1, 0), node.settings.get('cellBackgroundColor', '#ffffff')),
                      ('TEXTCOLOR', (0, 0), (-1, 0), node.settings.get('cellTextColor', '#000000')),
                      ('ALIGN', (0, 1), (0, -1), node.settings.get('cellTextAlign', 'CENTER')),
