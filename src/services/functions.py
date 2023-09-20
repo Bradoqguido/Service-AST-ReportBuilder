@@ -73,7 +73,7 @@ class Functions:
                 table.setStyle(col_header_style)
                 table.setStyle(row_header_style)
 
-                spacer = Spacer(1, 20)  # 20 points of space
+                spacer = Spacer(1, 10)  # 20 points of space
 
                 # Add the spacer before the table
                 elements.append(spacer)
@@ -111,7 +111,7 @@ class Functions:
                 # Apply the styles to the table
                 list.setStyle(list_style)
 
-                spacer = Spacer(1, 20)  # 20 points of space
+                spacer = Spacer(1, 10)  # 20 points of space
 
                 # Add the spacer before the table
                 elements.append(spacer)
@@ -122,15 +122,14 @@ class Functions:
                 # Add the spacer after the table
                 elements.append(spacer)
             elif node.node_type == 'horizontal-line-chart':
+                elements.append(Paragraph(node.settings.get('chartTitle', ''), styles['Title']))
                 # Initialize data for the graph
-                xlabel = node.content[0].get("xlabel", None)
-                xdata = node.content[0].get("xdata", None)
-                ylabel = node.content[1].get("ylabel", None)
-                ydata = node.content[1].get("ydata", None)
-                pltWidth = node.settings.get('pltWidth', 400)
-                pltHeight = node.settings.get('pltHeight', 300)
+                chartXData = node.content[0].get("chartXData", None)
+                chatYData = node.content[1].get("chatYData", None)
+                pltWidth = node.settings.get('chartWidth', 400)
+                pltHeight = node.settings.get('chartHeight', 200)
 
-                if xlabel is None or ylabel is None or xdata is None or ydata is None:
+                if chartXData is None or chatYData is None:
                     raise ValueError("Invalid graph data in the AST")
 
                 # Create a drawing for the chart
@@ -140,14 +139,14 @@ class Functions:
                 data = []
                 minValue = float('inf')  # Initialize minValue to positive infinity
                 maxValue = float('-inf')  # Initialize maxValue to negative infinity
-                for row in ydata:
-                    max_in_row = max(row.get("data"))
-                    min_in_row = min(row.get("data"))
+                for row in chatYData:
+                    max_in_row = max(row.get("row"))
+                    min_in_row = min(row.get("row"))
                     if max_in_row > maxValue:
                         maxValue = max_in_row
                     if min_in_row < minValue:
                         minValue = min_in_row
-                    data.append(tuple(row.get("data")))
+                    data.append(tuple(row.get("row")))
 
                 # Calculate the range of values
                 valueRange = maxValue - minValue
@@ -164,7 +163,7 @@ class Functions:
                 lc.width = 300
                 lc.data = data
                 lc.joinedLines = 1
-                lc.categoryAxis.categoryNames = xdata
+                lc.categoryAxis.categoryNames = chartXData
                 lc.categoryAxis.labels.boxAnchor = 'n'
                 lc.valueAxis.valueMin = 0 # Min value is always 0
                 lc.valueAxis.valueMax = maxValue
