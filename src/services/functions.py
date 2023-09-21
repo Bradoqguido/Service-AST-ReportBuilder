@@ -167,7 +167,7 @@ class Functions:
                 # Create a horizontal line plot
                 lc = HorizontalLineChart()
                 lc.y = 50
-                lc.x = 50
+                lc.x = 90
                 lc.height = 125
                 lc.width = 300
                 lc.data = data
