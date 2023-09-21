@@ -5,7 +5,7 @@ from reportlab.platypus import Paragraph, SimpleDocTemplate, Table, TableStyle, 
 from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.graphics.charts.piecharts import Pie
-from reportlab.graphics.shapes import Drawing, String
+from reportlab.graphics.shapes import Drawing
 from reportlab.graphics.charts.linecharts import HorizontalLineChart
 from services.pdfNode import PDFNode
 
