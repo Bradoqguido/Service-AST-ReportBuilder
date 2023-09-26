@@ -1,4 +1,4 @@
-FROM node:18.12.1-alpine
+FROM node:18.17.1-alpine
 LABEL maintainer="Jeferson Eduardo Guido <JefersonEduardoGuido@gmail.com>"
 
 RUN apk update
