@@ -1,4 +1,4 @@
-### Version 0.1.5
+### Version 0.1.6
 
 # Service-AST-ReportBuilder
 This service is a Report Builder that uses Abstract Syntax Tree (AST) as JSON pseudocode to generate reports and graphs.
@@ -53,11 +53,15 @@ the children nodes are:
   - *children*
     - line_row
       - *content*: string[]
+- `page-break`
 
 The example payload is already tested, and it's the structure of the pdf document. 
 ```json
 {
   "node_type": "document",
+  "settings": {
+    "spaceAfter": 20
+  },
   "children": [
     {
       "node_type": "title",
@@ -68,7 +72,10 @@ The example payload is already tested, and it's the structure of the pdf documen
     },
     {
       "node_type": "paragraph",
-      "content": ["It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."]
+      "content": ["It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."],
+      "settings": {
+        "spaceAfter": 20
+      }
     },
     {
       "node_type": "table",
@@ -88,7 +95,8 @@ The example payload is already tested, and it's the structure of the pdf documen
         "cellTextAlign": "CENTER",
         "colHeaderFontName": "Helvetica-Bold",
         "rowHeaderFontName": "Times-Bold",
-        "cellFontName": "Helvetica"
+        "cellFontName": "Helvetica",
+        "spaceAfter": 20
       },
       "children": [
         {
@@ -120,7 +128,8 @@ The example payload is already tested, and it's the structure of the pdf documen
         "cellGridColor": "#ffffff",
         "listColSpam": 6,
         "colHeaderTextAlign": "CENTER",
-        "cellTextAlign": "LEFT",
+        "colHeaderFontName": "Helvetica-Bold",
+        "cellTextAlign": "CENTER",
         "cellFontName": "Helvetica"
       },
       "children": [
@@ -167,6 +176,21 @@ The example payload is already tested, and it's the structure of the pdf documen
             "row": [22, 16, 15, 30, 33.5, 7]
           }
         ]
+      }
+      ]
+    },
+    {
+      "node_type": "page-break"
+    },
+    {
+      "node_type": "pie-chart",
+      "settings": {
+        "chartTitle": "Pie Graph of most used words"
+      },
+      "content": [{
+        "chartLabels": ["a","b","c","d","e","f"]
+      },{
+        "chartData": [10,20,30,40,50,60]
       }
       ]
     }

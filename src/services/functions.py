@@ -1,7 +1,7 @@
 import json
 from io import BytesIO
 from reportlab.lib.pagesizes import letter
-from reportlab.platypus import Paragraph, SimpleDocTemplate, Table, TableStyle, Spacer
+from reportlab.platypus import Paragraph, SimpleDocTemplate, Table, TableStyle, Spacer, PageBreak
 from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.graphics.charts.piecharts import Pie
@@ -190,7 +190,47 @@ class Functions:
 
                 # Add the spacer after
                 elements.append(Spacer(1, node.settings.get('spaceAfter', 0)))
+            elif node.node_type == 'pie-chart':
+                # Initialize data for the graph
+                chartLabels = node.content[0].get("chartLabels", None)
+                chartData = node.content[1].get("chartData", None)
+                chartWidth = node.settings.get('chartWidth', 150)
+                chartHeight = node.settings.get('chartHeight', 250)
 
+                if chartLabels is None or chartData is None:
+                    raise ValueError("Invalid graph data in the AST")
+
+                # Create a drawing for the chart
+                chart = Drawing(chartWidth, chartHeight)
+
+                pc = Pie()
+                pc.y = 50
+                pc.x = 150
+                pc.width = 170
+                pc.height = 170
+                pc.data = chartData
+                pc.labels = chartLabels
+
+                pc.slices.strokeWidth=0.5
+                # pc.slices[3].popout = 10
+                # pc.slices[3].strokeWidth = 2
+                # pc.slices[3].strokeDashArray = [2,2]
+                # pc.slices[3].labelRadius = 1.75
+                # pc.slices[3].fontColor = colors.red
+                chart.add(pc)
+
+                # Add the spacer before
+                elements.append(Spacer(1, node.settings.get('spaceBefore', 0)))
+
+                # Add the title and chart to the PDF elements
+                elements.append(Paragraph(node.settings.get('chartTitle', ''), styles['Title']))
+                elements.append(chart)
+
+                # Add the spacer after
+                elements.append(Spacer(1, node.settings.get('spaceAfter', 0)))
+            elif node.node_type == 'page-break':
+                # Page Break
+                elements.append(PageBreak())
             for child in node.children:
                 render_node(child)
 
