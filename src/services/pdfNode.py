@@ -4,6 +4,7 @@ class PDFNode:
         self.node_type = node_type
         self.content = content if content is not None else []
         self.settings = settings if settings is not None else {
+            "orientation": "portrait",
             "colWidth": 100,
             "rowHeight": 16,
             "colHeaderBackgroundColor": "#ffffff",

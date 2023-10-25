@@ -1,4 +1,4 @@
-### Version 0.1.6
+### Version 0.1.7
 
 # Service-AST-ReportBuilder
 This service is a Report Builder that uses Abstract Syntax Tree (AST) as JSON pseudocode to generate reports and graphs.
@@ -27,6 +27,7 @@ Run container: `docker-compose -f docker-compose.yml up`
 This document is oriented by node and their content, settings and children.
 
 the root node is `document` <br>
+- *settings*: object
 the children nodes are:
 - `title`
   - *content*: string
@@ -60,7 +61,7 @@ The example payload is already tested, and it's the structure of the pdf documen
 {
   "node_type": "document",
   "settings": {
-    "spaceAfter": 20
+    "orientation": "landscape"
   },
   "children": [
     {

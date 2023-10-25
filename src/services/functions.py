@@ -1,6 +1,6 @@
 import json
 from io import BytesIO
-from reportlab.lib.pagesizes import letter
+from reportlab.lib.pagesizes import portrait, landscape, A4
 from reportlab.platypus import Paragraph, SimpleDocTemplate, Table, TableStyle, Spacer, PageBreak
 from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet
@@ -16,9 +16,13 @@ class Functions:
     # Define a function to generate a PDF from an AST
     def generate_pdf_from_ast(self, node):
         buffer = BytesIO()
+        orientation = node.settings.get('orientation', 'portrait')
 
         # Create a PDF document
-        doc = SimpleDocTemplate(buffer, pagesize=letter)
+        if (orientation == "landscape"):
+            doc = SimpleDocTemplate(buffer, pagesize=landscape(A4))
+        else:
+            doc = SimpleDocTemplate(buffer, pagesize=A4)
 
         # Define styles for the PDF
         styles = getSampleStyleSheet()
