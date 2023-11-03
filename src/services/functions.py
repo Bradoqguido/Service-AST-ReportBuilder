@@ -1,6 +1,6 @@
 import json
 from io import BytesIO
-from reportlab.lib.pagesizes import portrait, landscape, A4
+from reportlab.lib.pagesizes import landscape, A4
 from reportlab.platypus import Paragraph, SimpleDocTemplate, Table, TableStyle, Spacer, PageBreak
 from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet
@@ -56,9 +56,17 @@ class Functions:
                 elements.append(Spacer(1, node.settings.get('spaceAfter', 0)))
             elif node.node_type == 'table':
                 # Construct a data list for the table
-                table_data = [node.content]  # Header row
-                for row_node in node.children:
-                    table_data.append(row_node.content)  # Data rows
+                table_data = []
+
+                # Extract column headers from the first row in the AST
+                col_headers = node.content
+                table_data.append(col_headers)  # Header row
+
+                for row_node in node.children:  # Iterate through all table_row nodes
+                    row_data = []
+                    for cell_node in row_node.children:
+                        row_data.append(cell_node.content)
+                    table_data.append(row_data)  # Data rows
 
                 # Create a table and set its style
                 table = Table(table_data, colWidths=node.settings.get('colWidth', 100), rowHeights=node.settings.get('rowHeight', 16))
@@ -68,20 +76,20 @@ class Functions:
                     ('BACKGROUND', (0, 0), (-1, 0), node.settings.get('colHeaderBackgroundColor', '#ffffff')),
                     ('TEXTCOLOR', (0, 0), (-1, 0), node.settings.get('colHeaderTextColor', '#000000')),
                     ('ALIGN', (0, 0), (-1, 0), node.settings.get('colHeaderTextAlign', 'CENTER')),
-                    ('FONTNAME', (0, 0), (-1, 0), node.settings.get('colHeaderFontName', 'Helvetica-Bold')),  # Font for column headers
+                    ('FONTNAME', (0, 0), (-1, 0), node.settings.get('colHeaderFontName', 'Helvetica-Bold')),
                 ])
 
                 row_header_style = TableStyle([
-                    ('ALIGN', (0, 1), (0, -1), node.settings.get('rowHeaderTextAlign', 'CENTER')),
-                    ('BACKGROUND', (0, 1), (0, -1), node.settings.get('rowHeaderBackgroundColor', '#ffffff')),
-                    ('FONTNAME', (0, 1), (0, -1), node.settings.get('rowHeaderFontName', 'Times-Bold')),  # Font for row headers (excluding the first column)
+                    ('ALIGN', (0, 0), (0, -1), node.settings.get('rowHeaderTextAlign', 'CENTER')),
+                    ('BACKGROUND', (0, 0), (0, -1), node.settings.get('rowHeaderBackgroundColor', '#ffffff')),
+                    ('FONTNAME', (0, 0), (0, -1), node.settings.get('rowHeaderFontName', 'Times-Bold')),
                 ])
 
                 table_body_style = TableStyle([
                     ('BACKGROUND', (0, 0), (-1, 0), node.settings.get('cellBackgroundColor', '#ffffff')),
                     ('TEXTCOLOR', (0, 0), (-1, 0), node.settings.get('cellTextColor', '#000000')),
-                    ('ALIGN', (1, 1), (-1, -1), node.settings.get('cellTextAlign', 'CENTER')),
-                    ('FONTNAME', (0, 1), (-1, -1), node.settings.get('cellFontName', 'Helvetica')),  # Font for the table body
+                    ('ALIGN', (0, 0), (-1, -1), node.settings.get('cellTextAlign', 'CENTER')),
+                    ('FONTNAME', (0, 0), (-1, -1), node.settings.get('cellFontName', 'Helvetica')),
                     ('GRID', (0, 0), (-1, -1), 1, node.settings.get('cellGridColor', '#000000')),
                 ])
 
@@ -98,6 +106,7 @@ class Functions:
 
                 # Add the spacer after
                 elements.append(Spacer(1, node.settings.get('spaceAfter', 0)))
+
             elif node.node_type == 'list':
                 # Construct a data list for the table
                 list_data = [node.content]  # Header row

@@ -78,9 +78,10 @@ The example payload is already tested, and it's the structure of the pdf documen
         "spaceAfter": 20
       }
     },
+
     {
       "node_type": "table",
-      "content": ["Sensor", "Data", "Day", "Sensor 1", "Sensor 2", "Sensor 3"],
+      "content": ["Sensor", "Data", "Day", "Sensor 1", "Sensor 2", "Sensor 3", "Sensor 3"],
       "settings": {
         "colWidth": 100,
         "rowHeight": 16,
@@ -102,19 +103,187 @@ The example payload is already tested, and it's the structure of the pdf documen
       "children": [
         {
           "node_type": "table_row",
-          "content": ["Sensor 1", "Value 1", 1,2,3,4]
+          "content": [],
+          "children": [
+            {
+              "node_type": "table_cell",
+              "content": "Row 1"
+            },
+            {
+              "node_type": "table_cell",
+              "content": "Value 1"
+            },
+            {
+              "node_type": "table_cell",
+              "content": "1",
+              "settings": {
+                "cellTextColor": "#FF0000"
+              }
+            },
+            {
+              "node_type": "table_cell",
+              "content": "2",
+              "settings": {
+                "cellTextColor": "#FF0000"
+              }
+            },
+            {
+              "node_type": "table_cell",
+              "content": "3",
+              "settings": {
+                "cellTextColor": "#FF0000"
+              }
+            },
+            {
+              "node_type": "table_cell",
+              "content": "4",
+              "settings": {
+                "cellTextColor": "#FF0000"
+              }
+            },
+            {
+              "node_type": "table_cell",
+              "content": "Value 1"
+            }
+          ]
         },
         {
           "node_type": "table_row",
-          "content": ["Sensor 2", "Value 2", 2,2,3,4]
+          "content": [],
+          "children": [
+            {
+              "node_type": "table_cell",
+              "content": "Row 2"
+            },
+            {
+              "node_type": "table_cell",
+              "content": "Value 2"
+            },
+            {
+              "node_type": "table_cell",
+              "content": "1",
+              "settings": {
+                "cellTextColor": "#FF0000"
+              }
+            },
+            {
+              "node_type": "table_cell",
+              "content": "2",
+              "settings": {
+                "cellTextColor": "#FF0000"
+              }
+            },
+            {
+              "node_type": "table_cell",
+              "content": "3",
+              "settings": {
+                "cellTextColor": "#FF0000"
+              }
+            },
+            {
+              "node_type": "table_cell",
+              "content": "4",
+              "settings": {
+                "cellTextColor": "#FF0000"
+              }
+            },
+            {
+              "node_type": "table_cell",
+              "content": "Value 1"
+            }
+          ]
         },
         {
           "node_type": "table_row",
-          "content": ["Sensor 3", "Value 3", 3,2,3,4]
+          "content": [],
+          "children": [
+            {
+              "node_type": "table_cell",
+              "content": "Row 3"
+            },
+            {
+              "node_type": "table_cell",
+              "content": "Value 3"
+            },
+            {
+              "node_type": "table_cell",
+              "content": "1",
+              "settings": {
+                "cellTextColor": "#FF0000"
+              }
+            },
+            {
+              "node_type": "table_cell",
+              "content": "2",
+              "settings": {
+                "cellTextColor": "#FF0000"
+              }
+            },
+            {
+              "node_type": "table_cell",
+              "content": "3",
+              "settings": {
+                "cellTextColor": "#FF0000"
+              }
+            },
+            {
+              "node_type": "table_cell",
+              "content": "4",
+              "settings": {
+                "cellTextColor": "#FF0000"
+              }
+            },
+            {
+              "node_type": "table_cell",
+              "content": "Value 1"
+            }
+          ]
         },
         {
           "node_type": "table_row",
-          "content": ["Sensor 4", "Value 4", 4,2,3,4]
+          "content": [],
+          "children": [
+            {
+              "node_type": "table_cell",
+              "content": "Row 4"
+            },
+            {
+              "node_type": "table_cell",
+              "content": "Value 4"
+            },
+            {
+              "node_type": "table_cell",
+              "content": "1",
+              "settings": {
+                "cellTextColor": "#FF0000"
+              }
+            },
+            {
+              "node_type": "table_cell",
+              "content": "2",
+              "settings": {
+                "cellTextColor": "#FF0000"
+              }
+            },
+            {
+              "node_type": "table_cell",
+              "content": "3",
+              "settings": {
+                "cellTextColor": "#FF0000"
+              }
+            },
+            {
+              "node_type": "table_cell",
+              "content": "4",
+              "settings": {
+                "cellTextColor": "#FF0000"
+              }
+            },
+            {
+              "node_type": "table_cell",
+              "content": "Value 1"
+            }
+          ]
         }
       ]
     },
@@ -151,6 +320,9 @@ The example payload is already tested, and it's the structure of the pdf documen
           "content": ["It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."]
         }
       ]
+    },
+    {
+      "node_type": "page-break"
     },
     {
       "node_type": "horizontal-line-chart",
