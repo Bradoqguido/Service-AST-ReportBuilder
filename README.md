@@ -48,7 +48,9 @@ the children nodes are:
   - *content*: string[]
   - *children*
     - table_row
-      - *content*: []
+      - *children*
+        - table_cell
+        - *content*: string
 - `list`
   - *content*: string[]
   - *children*
