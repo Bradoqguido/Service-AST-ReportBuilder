@@ -66,6 +66,9 @@ class Functions:
                     row_data = []
                     for cell_node in row_node.children:
                         row_data.append(cell_node.content)
+                        cell_style = [
+                            ('TEXTCOLOR', (0, 0), (-1, 0), cell_node.settings.get('cell_text_color', '#000000'))
+                        ]
                     table_data.append(row_data)  # Data rows
 
                 # Create a table and set its style
@@ -85,18 +88,19 @@ class Functions:
                     ('FONTNAME', (0, 0), (0, -1), node.settings.get('rowHeaderFontName', 'Times-Bold')),
                 ])
 
-                table_body_style = TableStyle([
-                    ('BACKGROUND', (0, 0), (-1, 0), node.settings.get('cellBackgroundColor', '#ffffff')),
-                    ('TEXTCOLOR', (0, 0), (-1, 0), node.settings.get('cellTextColor', '#000000')),
-                    ('ALIGN', (0, 0), (-1, -1), node.settings.get('cellTextAlign', 'CENTER')),
-                    ('FONTNAME', (0, 0), (-1, -1), node.settings.get('cellFontName', 'Helvetica')),
-                    ('GRID', (0, 0), (-1, -1), 1, node.settings.get('cellGridColor', '#000000')),
-                ])
-
                 # Apply the styles to the table
-                table.setStyle(table_body_style)
                 table.setStyle(col_header_style)
                 table.setStyle(row_header_style)
+
+                for i, row_node in enumerate(node.children, 1):  # Iterate through all table_row nodes
+                    for j, cell_node in enumerate(row_node.children):
+                        # Set the style for the specific cell using its coordinates
+                        cell_style = [('TEXTCOLOR', (j, i), (j, i), cell_node.settings.get('cellTextColor','#000000')),
+                                      ('BACKGROUND', (j, i), (j, i), cell_node.settings.get('cellBackgroundColor', '#ffffff')),
+                                      ('ALIGN', (j, i), (j, i), cell_node.settings.get('cellTextAlign', 'CENTER')),
+                                      ('FONTNAME', (j, i), (j, i), cell_node.settings.get('cellFontName', 'Helvetica')),
+                                      ('GRID', (j, i), (j, i), 1, cell_node.settings.get('cellGridColor', '#000000')),]  # Change text color to red for the specific cell
+                        table.setStyle(TableStyle(cell_style))
 
                 # Add the spacer before
                 elements.append(Spacer(1, node.settings.get('spaceBefore', 0)))
@@ -106,7 +110,6 @@ class Functions:
 
                 # Add the spacer after
                 elements.append(Spacer(1, node.settings.get('spaceAfter', 0)))
-
             elif node.node_type == 'list':
                 # Construct a data list for the table
                 list_data = [node.content]  # Header row

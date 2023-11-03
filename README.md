@@ -51,6 +51,7 @@ the children nodes are:
       - *children*
         - table_cell
         - *content*: string
+        - *settings*: object
 - `list`
   - *content*: string[]
   - *children*
@@ -93,13 +94,8 @@ The example payload is already tested, and it's the structure of the pdf documen
         "rowHeaderBackgroundColor": "#ffffff",
         "rowHeaderTextColor": "#000000",
         "rowHeaderTextAlign": "CENTER",
-        "cellBackgroundColor": "#ffffff",
-        "cellTextColor": "#000000",
-        "cellGridColor": "#000000",
-        "cellTextAlign": "CENTER",
         "colHeaderFontName": "Helvetica-Bold",
         "rowHeaderFontName": "Times-Bold",
-        "cellFontName": "Helvetica",
         "spaceAfter": 20
       },
       "children": [
@@ -145,7 +141,10 @@ The example payload is already tested, and it's the structure of the pdf documen
             },
             {
               "node_type": "table_cell",
-              "content": "Value 1"
+              "content": "Value 1",
+              "settings": {
+                "cellBackgroundColor": "#03ff45"
+              }
             }
           ]
         },
@@ -205,7 +204,10 @@ The example payload is already tested, and it's the structure of the pdf documen
             },
             {
               "node_type": "table_cell",
-              "content": "Value 3"
+              "content": "Value 3",
+              "settings": {
+                "cellBackgroundColor": "#035f45"
+              }
             },
             {
               "node_type": "table_cell",
@@ -264,7 +266,8 @@ The example payload is already tested, and it's the structure of the pdf documen
               "node_type": "table_cell",
               "content": "2",
               "settings": {
-                "cellTextColor": "#FF0000"
+                "cellTextColor": "#FF0000",
+                "cellBackgroundColor": "#071f61"
               }
             },
             {
